@@ -12,9 +12,11 @@ var fetchCars = function(){
 				//window.location = "/adminHome";
 				var html = "";
 				for(car of cars){
-					html += "<div class='car-display' id='+car.carname+''><b>"+car.carname+"</b><br>Model: "+car.model+"<br>Fare per hour:\
+					html += "<div class='car-display' id='+car.carname+''><b>"+car.carname+"</b><br>Model:\
+					 "+car.model+"<br>Fare per hour:\
 					"+car.fare+"<br>Available units:"+car.available+"\
-					<button class='car-display-button' type='button' onclick='javascript:bookCar("+car.carname+");'>Book</button></div>";
+					<br><img src=/images/"+car.carname.replace(/ /g,'')+".jpeg class='image' alt='CAR'>\
+					<br><button class='car-display-button' type='button' onclick='javascript:bookCar("+car.carname+");'>Book</button></div>";
 				}
 				document.getElementById("carlist").innerHTML = html;
 			}	
