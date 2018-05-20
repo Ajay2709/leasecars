@@ -5,9 +5,10 @@
 	<link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src='../javascript/authentication_ajax.js'></script>
     <script src='../javascript/user_actions_ajax.js'></script>
-    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="/css/style.css"/> 
 </head>
@@ -19,18 +20,26 @@
 	</p>
 	<div id='error_msg' class='text-center'></div>
 	<div id="carlist"></div>
-	<div data-role="popup" id="bookpopup" class="ui-content" style="min-width:250px;">
-      <form \>
-        <h3>Booking information</h3>
+	<div class="modal fade" id="bookpopup" role="dialog">
+		<div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Booking Information</h4>
+        </div>
+      <form style="background-color: lightblue" class="modal-body">
 	    <label for="location" class="sr-only">Location</label>
 	    <input type="text" name="location" id="location" class="form-control" placeholder="Location" required>
 	    <label for="hireDate"class="sr-only">Hire Date</label>
 	    <input type="date" name="hireDate" id="hireDate" class="form-control" placeholder="Hire Date" required>
 	    <label for="returnDate" class="sr-only">Return Date</label>
 	    <input type="date" name="returnDate" id="returnDate" class="form-control" placeholder="Return Date" required>
-	    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="javascript:bookCar();">Book Now</button>
+	    <button class="butn-book butn" type="button" onclick="javascript:bookCar();">Book Now</button>
       </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
     </div>
-	<
+    </div>
+    </div>
 </body>
 </html>

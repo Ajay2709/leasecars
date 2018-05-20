@@ -8,11 +8,11 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="/css/style.css"/>
 </head>
-<body class='text-center' onload='javascript:fetchCars();'>
-  Admin Home page
+<body class='text-center' onload="javascript:fetchCars()">
+  <h1>ADMININSTRATOR</h1>
   <div id='error_msg' class='text-center'></div>
-  <button class="btn btn-lg " type="button" onclick="location.href='logout'">Log out</button>
-  <button class="btn btn-lg " type="button" onclick="javascript:adminChangePassword();">Change Password</button>
+  <button class="btn btn-lg butn " type="button" onclick="location.href='logout'">Log out</button>
+  <button class="btn btn-lg butn" type="button" onclick="javascript:adminChangePassword();">Change Password</button>
   <div id='adminpwd' style="display: none;">
     <form id="signup_form" class="form-signin text-center" style="margin:auto">
     <label for="inputEmail" class="sr-only">Enter Current Password</label>
@@ -23,7 +23,7 @@
       <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='adminHome'">Cancel</button>;
     </form>
   </div>
-  <button class="btn btn-lg " type="button" onclick="javascript:addNewCar();">Add car</button>
+  <button class="btn btn-lg butn " type="button" onclick="javascript:addNewCar();">Add car</button>
   <div id="addcarform" style="display: none;">
     <form id = "addcar" class="form-signin text-center" style="margin:auto">
       <label for="carName" class="sr-only">Car Name</label>

@@ -52,7 +52,10 @@ var fetchCars = function(){
 				//window.location = "/adminHome";
 				var html = "";
 				for(car of cars){
-					html += "<div id='+car.carname+''><b>"+car.carname+"</b><br>Model: "+car.model+"<br>Fare per hour:"+car.fare+"<br>Available units:"+car.available+"</div>";
+					html += "<div class='car-display' id='+car.carname+''><b>"+car.carname+"</b><br>Model:\
+					 "+car.model+"<br>Fare per hour:\
+					"+car.fare+"<br>Available units:"+car.available+"\
+					<br><img src=/images/"+car.carname.replace(/ /g,'')+".jpeg class='image' alt='CAR'></div>";
 				}
 				document.getElementById("carlist").innerHTML = html;
 			}	
