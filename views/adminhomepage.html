@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Log In</title>
+  <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <script src='../javascript/authentication_ajax.js'></script>
+    <script src='../javascript/admin_actions_ajax.js'></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body class='text-center' onload='javascript:fetchCars();'>
+  Admin Home page
+  <div id='error_msg' class='text-center'></div>
+  <button class="btn btn-lg " type="button" onclick="location.href='logout'">Log out</button>
+  <button class="btn btn-lg " type="button" onclick="javascript:adminChangePassword();">Change Password</button>
+  <div id='adminpwd' style="display: none;">
+    <form id="signup_form" class="form-signin text-center" style="margin:auto">
+    <label for="inputEmail" class="sr-only">Enter Current Password</label>
+    <input type="password" id="adminOldPassword" class="form-control" name="password" placeholder="Password" required>
+    <label for="inputEmail" class="sr-only">Enter New Password</label>
+    <input type="password" id="adminNewPassword" class="form-control" name="password" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="javascript:adminUpdatePassword();">Change Password</button>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='adminHome'">Cancel</button>;
+    </form>
+  </div>
+  <button class="btn btn-lg " type="button" onclick="javascript:addNewCar();">Add car</button>
+  <div id="addcarform" style="display: none;">
+    <form id = "addcar" class="form-signin text-center" style="margin:auto">
+      <label for="carName" class="sr-only">Car Name</label>
+      <input type = "text" id = "carName" class="form-control" name="carName" placeHolder="Enter car name" required>
+      <br>
+      <label for=" carModel" class="sr-only">Model</label>
+      <input type = "text" id = "carModel" class="form-control" name="carModel" placeHolder="Enter car Model" required>
+      <br>
+      <label for="carFare" class="sr-only">Fare</label>
+      <input type = "number" id = "carFare" class="form-control" name="carFare" placeHolder="Enter fare for the car" required>
+      <br>
+      <label for="carCount" class="sr-only">Units</label>
+      <input type = "number" id = "carCount" class="form-control" name="carCount" placeHolder="Enter no. of cars for rent" required>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="button" onclick="javascript:addCar();">Add Car</button>
+    </form>
+  </div>
+  <div id="carlist"></div>
+</body>
+</html>

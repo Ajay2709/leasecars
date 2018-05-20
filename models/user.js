@@ -1,22 +1,21 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+
+
 var UserSchema = mongoose.Schema({
 	email: String,
 	username: String,
 	password: String,
-	
 });
 
-
-
 var User = module.exports = mongoose.model('User', UserSchema);
-
 
 module.exports.createUser = function(newUser,req, res, callback){
 	console.log("current email:"+newUser.email);
 	var query = {email: newUser.email};
 	User.find(query,function(err, result){
 		console.log(result);
+		//response = {status: 0, msg: ''};
 		if(result.length == 0){
 			console.log("account valid");
 			var bcrypt = require('bcryptjs');
@@ -73,4 +72,5 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 	});
 	//return passwordHash.verify(candidatePassword, this.password);
 };
+
 

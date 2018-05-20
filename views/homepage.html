@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{title}}</title>
+	<title>Homepage</title>
 	<link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src='../javascript/authentication_ajax.js'></script>
-    <script src='../javascript/home_actions_ajax.js'></script>
+    <script src='../javascript/user_actions_ajax.js'></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="/css/style.css"/>
 </head>
-<body class='text-center'>
-	<p id='greetings'></p>
-	<h1>this is the home page</h1>
+<body class='text-center' onload="javascript:fetchCars()">
+	<p id='greetings'>
+		<h1>this is the home page</h1>
+	</p>
+	<div id='error_msg' class='text-center'></div>
+	<button class="btn btn-lg " type="button" onclick="location.href='logout'">Log out</button>
+	<div id="carlist"></div>
 </body>
 </html>

@@ -3,12 +3,20 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require("passport-local").Strategy;
 var User = require('../models/user');
+var Car = require('../models/car');
 var util = require('util');
+
+
+router.get('/', function(req, res){
+  console.log("in get /");
+  //res.sendFile(path.join(__dirname+'/views/index.html'));
+  res.redirect('/signup');
+})
 
 router.get('/signup',function(req, res){
   console.log("redirected to signup");
-  //res.sendFile(path.join(__dirname+'/views/signup.html'));
-  res.render('signup', {title: "Sign up", condition: false});
+  res.sendFile(path.join(__dirname+'/views/signup.html'));
+  //res.render('signup');
 });
 
 
@@ -23,7 +31,7 @@ router.post('/signup', function(req, res, next){
   var errors = req.validationErrors();
   if(errors){
     console.log("Errors in signup");
-    var error_msg = "<div class='alert alert-danger'>"+errors[0].msg+"<br></div>";
+    var error_msg = errors[0].msg;
     console.log("error msg:"+error_msg);
     req.session.errors = errors;
     req.session.success = false;
@@ -41,9 +49,9 @@ router.post('/signup', function(req, res, next){
     });
     
     console.log("newUser:"+JSON.stringify(newUser));
-    User.createUser(newUser, req, res, function( res, response){
-      console.log("in callback: response = "+JSON.stringify(response));
-      res.send(JSON.stringify(response));
+    User.createUser(newUser, req, res, function( res, result){
+      console.log("in callback: response = "+JSON.stringify(result));
+      res.send(JSON.stringify(result));
     });
   }
 
@@ -52,8 +60,8 @@ router.post('/signup', function(req, res, next){
 
 router.get('/login',function(req, res){
   console.log("redirected to login");
-  //res.sendFile(path.join(__dirname+"/views/login.html"));
-  res.render('login', { title: "Log in", condition: false});
+  res.sendFile(path.join(__dirname+"/views/login.html"));
+  //res.render('login', { title: "Log in", condition: false}); /*Use when using view engines otherwise throws error*/
 });
 
 
@@ -72,8 +80,7 @@ passport.use(new LocalStrategy(
           }
           else return done(null, false, {message: 'Incorrect password'});
         });
-      }  
-    )
+      })
   //})
 }));
 
@@ -95,14 +102,14 @@ router.post('/login', function(req, res, next) {
     // Redirect if it fails
     if (!user) {
       //req.flash('error_msg', 'Login failed!'); 
-      var response = {status : 406, msg : "<div class='alert alert-danger'>Login failed!<br></div>" };
+      var response = {status : 406, msg : "Incorrect Username/password!"};
       res.send(JSON.stringify(response));
       //return res.redirect('/login'); 
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       //Redirect if it succeeds
-      console.log("logged in user "+req.session.passport.user);
+      console.log("loggd in user "+req.session.passport.user);
       var response = {status : 200, msg : "Login successful!", user: req.session.passport.user};
       res.send(JSON.stringify(response));
       //return res.redirect('/users/homepage');//'/users/' + user.username
@@ -132,10 +139,23 @@ router.get('/homepage', function(req, res){
     console.log("not logged in");
     //var response = {status : 406, msg : "<div class='alert alert-danger'>You are not logged in!<br></div>" };
     //document.getElementById('error_msg').innerHTML = response.msg;
-    res.redirect('/users/login');
+    res.redirect('/login');
   }
-  
 });
 
 
-module.exports = router;
+router.get('/addcar', function(req, res, next){
+  console.log("addcar POST");
+  var newCar = new Car({
+    carname: req.body.carname,
+    model: req.body.model,
+    fare: req.body.fare,
+    count: req.body.count,
+    available: req.body.available
+  });
+  Car.addCar(req, res, newCar, function( res, result){
+      console.log("in callback: response = "+JSON.stringify(result));
+      res.send(JSON.stringify(result));
+    });
+
+});

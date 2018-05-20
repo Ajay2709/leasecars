@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Index Page</title>
+  <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <script src='../javascript/authentication_ajax.js'></script>
+    
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body class='text-center'>
+	<h2>Welcome to CarlEASE!</h2>
+	<p>New to this website?</p>
+	<button class="btn btn-lg " type="button" onclick="location.href='./signup'">Register</button>
+	<p>Already a user?</p>
+	<button class="btn btn-lg " type="button" onclick="location.href='./login'">Log In</button>
+	<p>Are you an Admin?</p>
+	<button class="btn btn-lg " type="button" onclick="javascript:adminEnterPassword();">Admin</button>
+	<label for="adminPassword" class="sr-only">Password</label>
+  	<div id='adminpwd'></div>
+  	<div id='error_msg' class='text-center'></div>
+</body>
+</html>

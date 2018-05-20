@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{title}}</title>
+  <title>Register</title>
   <link rel="stylesheet" href="/css/bootstrap.css"/>
     <script src='../javascript/authentication_ajax.js'></script>
-    <script src='../javascript/home_actions_ajax.js'></script>
+   
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body class='text-center'>
   <div id='error_msg' class='text-center'></div>
-  <form id='signup_form' class='form-signin text-center' style="margin:auto" method='post' action='/users/signup' enctype='application/x-www-form-urlencoded'>
+  <form id='signup_form' class='form-signin text-center' style="margin:auto" method='post' action='/users/signup'>
     <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
@@ -29,7 +29,6 @@
       <!--<button class='btn btn-lg btn-primary btn-block' onclick="location.href='login'">Log In</button> -->
       <a href='./login'>Log In</a>
     </p>
-
   </form>
 </body>
 </html>
