@@ -39,27 +39,27 @@ var showBookingForm = function(carname){
 	currentCar = carname;
 	document.getElementById('bookingform').style.display = "block";
 }
+
+
 var bookCar = function(){
 	console.log("In  boookcar ajax");
 	var data = {
 		carname: currentCar,
-		user: req.session.passport.user,
 		location: document.getElementById('location').value,
 		hiredate: document.getElementById('hireDate').value,
-		returndate: document.getElementById('returnDate').value,
+		returndate: document.getElementById('returnDate').value
 	}
 	$.ajax({
-		url: 'bookcar',
+		url: 'returncar',
 		headers: {"Content-Type" : "application/json"},
 		type: "POST",
 		data: JSON.stringify(data),
 		success : function(result){
 			console.log("return to signup ajax success:"+result);
 			var data = JSON.parse(result);
-			var cars = data.data;
 			if(data.status == 200){
 				//window.location = "/adminHome";
-				
+				document.getElementById('error_msg').innerHTML = "<div class='alert alert-success'>"+data.msg+"<br></div>";
 			}	
 			else{
 				document.getElementById('error_msg').innerHTML = "<div class='alert alert-danger'>"+data.msg+"<br></div>";
@@ -70,5 +70,33 @@ var bookCar = function(){
 			console.log("return to signup ajax failure");
 			document.getElementById('error_msg').innerHTML = JSON.stringify(result);
 		}
+
  	});	
 }
+
+var returnCar = function(){
+	console.log("In  return car ajax");
+	$.ajax({
+		url: 'returncar',
+		headers: {"Content-Type" : "application/json"},
+		type: "GET",
+		success : function(result){
+			console.log("return to signup ajax success:"+result);
+			var data = JSON.parse(result);
+			if(data.status == 200){
+				//window.location = "/adminHome";
+				document.getElementById('error_msg').innerHTML = "<div class='alert alert-success'>"+data.msg+"<br></div>";
+			}	
+			else{
+				document.getElementById('error_msg').innerHTML = "<div class='alert alert-danger'>"+data.msg+"<br></div>";
+			}
+			
+		},
+		error : function(result){
+			console.log("return to signup ajax failure");
+			document.getElementById('error_msg').innerHTML = JSON.stringify(result);
+		}
+
+ 	});	
+}
+ 

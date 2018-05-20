@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var User = require('./models/user');
-var Car = require('./models/car');
+var User = require('./user');
+var Car = require('./car');
 
 var BookingSchema = mongoose.Schema({
 	carname: String,
@@ -10,33 +10,47 @@ var BookingSchema = mongoose.Schema({
 	returndate: Date
 });
 
+var Booking = module.exports = mongoose.model('Booking', BookingSchema);
 
-module.exports.bookCar = function(req, res, carname, callback){
-	console.log("in book car model"+carname);
-	var newBooking = {
-		carname : carname,
-		user: req.session.passport.user,
-		hireDate: 
-	}
-	console.log("in add car model:");
-	var query = {user: newCar.carname};
-	User.findById(user, function(err, doc){
+
+module.exports.bookCar = function(req, res, newBooking, callback){
+	console.log("in book car model"+newBooking);
+	var query = {user: newBooking.user};
+	Booking.find(query, function(err, doc){
 		if(err) throw err;
-		console.log("Query result:");
-		console.log(doc);
 		if(doc.length == 0){
-			Car.create(newCar, function(err, result){
+			Booking.create(JSON.stringify(newBooking));
+			console.log(newBooking);
+			Car.findOne({carname: newBooking.carname}, function(err, doc1){
 				if(err) throw err;
-				console.log("car booked!");
-				var response = { status: 200, msg: "One car booked!"};
-				callback(res, response);
-			});
+				var oldAvailable = doc1.available;
+				Car.findOneAndUpdate({carname:newBooking.carname},{$set:{available:oldAvailable-1}}, function(err, doc2){
+					console.log("user car booked.");
+		   		 	response = {status: 200, msg: "car booked"};
+		    		callback(res,response);
+				});
+			});	
 		}
 		else{
-			console.log("You have already booked a Car!");
-			var response = { status: 400, msg: "Car already booked!"};
-			callback(res, response);
+			console.log("user already booked.");
+		   	response = {status: 200, msg: "car not booked"};
+		    callback(res,response);
 		}
 	});
 }
 
+module.exports.returnCar = function(req, res, callback){
+	console.log("in return car model"+newBooking);
+	var query = {user: req.session.passport.user};
+	Booking.findOne(query, function(err, doc){
+		Car.findOneAndUpdate({carname:doc.carname},{$set:{available:oldAvailable-1}}, function(err, doc2){
+			console.log("car DB updated");
+   		});
+	});
+	Booking.deleteOne(query, function(err){
+		if(err) throw err;
+		response = {status: 200, msg: "car returned"};
+    	callback(res,response);
+	});
+
+}

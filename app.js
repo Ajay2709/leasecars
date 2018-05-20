@@ -254,9 +254,24 @@ app.get('/fetchcars', function(req, res){
 });
 
 
-app.get('/bookcar', function(req, res){
+app.post('/bookcar', function(req, res){
   console.log("in book car GET");
-  Booking.bookCar(req, res, req.query, function(res, result){
+  var newBooking = {
+    carname: req.body.carname,
+    user: req.session.passport.user,
+    location:req.body.location,
+    hiredate: req.body.hiredate,
+    returndate: req.body.returndate
+  };
+  console.log(newBooking);
+  Booking.bookCar(req, res, newBooking, function(res, result){
     res.send(JSON.stringify(result));
   });
+});
+
+app.get('/returncar', function(req, res){
+  console.log("in return car get");
+  Booking.returnCar(req, res, function(res, result){
+    res.send(JSON.stringify(result));
+  })
 });
