@@ -55,7 +55,7 @@ module.exports.getCars = function(req, res, callback){
 }
 
 
-module.exports.bookCar = function(req, res, carname, callback){
+/*module.exports.bookCar = function(req, res, carname, callback){
 	console.log("in book car model:");
 	Car.findOneAndUpdate({carname: carname}, function(err, docs){
 		if(err) throw err;
@@ -71,4 +71,4 @@ module.exports.bookCar = function(req, res, carname, callback){
 			callback(res, response);
 		}
 	});
-}
+}*/

@@ -13,17 +13,11 @@ var fetchCars = function(){
 				//window.location = "/adminHome";
 				var html = "";
 				for(car of cars){
-<<<<<<< HEAD
-					html += "<div class='car-display' id="+car.carname+"><b>"+car.carname+"</b><br>Model: "+car.model+"<br>Fare per hour:\
-					"+car.fare+"<br>Available units:"+car.available+"\
-					<button class='car-display-button' type='button' onclick='javascript:showBookingForm('"+car.carname+"');'>Book</button></div>";
-=======
 					html += "<div class='car-display' id='+car.carname+''><b>"+car.carname+"</b><br>Model:\
 					 "+car.model+"<br>Fare per hour:\
 					"+car.fare+"<br>Available units:"+car.available+"\
 					<br><img src=/images/"+car.carname.replace(/ /g,'')+".jpeg class='image' alt='CAR'>\
-					<br><button class='car-display-button' type='button' onclick='javascript:bookCar("+car.carname+");'>Book</button></div>";
->>>>>>> 820cc2c3d3b6112bf47dae13241a461eab1fcfb8
+					<br><a href='#bookpopup' data-rel='popup'>Book</a></div>";
 				}
 				document.getElementById("carlist").innerHTML = html;
 			}	
@@ -47,11 +41,18 @@ var showBookingForm = function(carname){
 }
 var bookCar = function(){
 	console.log("In  boookcar ajax");
+	var data = {
+		carname: currentCar,
+		user: req.session.passport.user,
+		location: document.getElementById('location').value,
+		hiredate: document.getElementById('hireDate').value,
+		returndate: document.getElementById('returnDate').value,
+	}
 	$.ajax({
 		url: 'bookcar',
 		headers: {"Content-Type" : "application/json"},
-		type: "GET",
-		data: currentCar,
+		type: "POST",
+		data: JSON.stringify(data),
 		success : function(result){
 			console.log("return to signup ajax success:"+result);
 			var data = JSON.parse(result);
