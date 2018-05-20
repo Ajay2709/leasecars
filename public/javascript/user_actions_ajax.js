@@ -1,3 +1,4 @@
+var currentCar = "";
 var fetchCars = function(){
 	console.log("In  fetchcars ajax");
 	$.ajax({
@@ -12,9 +13,9 @@ var fetchCars = function(){
 				//window.location = "/adminHome";
 				var html = "";
 				for(car of cars){
-					html += "<div class='car-display' id='+car.carname+''><b>"+car.carname+"</b><br>Model: "+car.model+"<br>Fare per hour:\
+					html += "<div class='car-display' id="+car.carname+"><b>"+car.carname+"</b><br>Model: "+car.model+"<br>Fare per hour:\
 					"+car.fare+"<br>Available units:"+car.available+"\
-					<button class='car-display-button' type='button' onclick='javascript:bookCar("+car.carname+");'>Book</button></div>";
+					<button class='car-display-button' type='button' onclick='javascript:showBookingForm('"+car.carname+"');'>Book</button></div>";
 				}
 				document.getElementById("carlist").innerHTML = html;
 			}	
@@ -30,13 +31,19 @@ var fetchCars = function(){
  	});
 }
 
-var bookCar = function(carname){
+
+var showBookingForm = function(carname){
+	console.log("in show booking form");
+	currentCar = carname;
+	document.getElementById('bookingform').style.display = "block";
+}
+var bookCar = function(){
 	console.log("In  boookcar ajax");
 	$.ajax({
 		url: 'bookcar',
 		headers: {"Content-Type" : "application/json"},
 		type: "GET",
-		data: carname,
+		data: currentCar,
 		success : function(result){
 			console.log("return to signup ajax success:"+result);
 			var data = JSON.parse(result);
