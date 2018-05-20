@@ -15,6 +15,7 @@ var mongoose = require('mongoose');
 
 var User = require('./models/user');
 var Car = require('./models/car');
+var Booking = require('./models/booking');
 mongoose.connect('mongodb://ajayTest:ajay2112@ds129540.mlab.com:29540/car_leasing_system');
 var db = mongoose.connection;
 
@@ -255,7 +256,7 @@ app.get('/fetchcars', function(req, res){
 
 app.get('/bookcar', function(req, res){
   console.log("in book car GET");
-  Car.bookCar(req, res, req.query, function(res, result){
+  Booking.bookCar(req, res, req.query, function(res, result){
     res.send(JSON.stringify(result));
   });
 });
