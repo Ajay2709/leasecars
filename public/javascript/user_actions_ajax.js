@@ -17,7 +17,7 @@ var fetchCars = function(){
 					 "+car.model+"<br>Fare per hour:\
 					"+car.fare+"<br>Available units:"+car.available+"\
 					<br><img src=/images/"+car.carname.replace(/ /g,'')+".jpeg class='image' alt='CAR'>\
-					<br><a href='#bookpopup' data-rel='popup'>Book</a></div>";
+					<br><button data-target='#bookpopup' data-toggle='modal' class='butn'>Book</button></div>";
 				}
 				document.getElementById("carlist").innerHTML = html;
 			}	
