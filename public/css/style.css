@@ -9,9 +9,8 @@ body {
   align-items: center;
   padding-top: 10px;
   padding-bottom: 40px;
-  background-color: #ffffcc;
+  background-image: url("/images/background.jpeg");
 }
-
 .butn{
     background-color: green;
     border: none;
@@ -24,6 +23,9 @@ body {
     font-size: 30px;
     margin: 4px 2px;
     cursor: pointer;
+
+}
+.butn-logout{
     margin-left: 1200px;
 }
 .butn:hover {
