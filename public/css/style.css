@@ -12,17 +12,19 @@ body {
   background-image: url("/images/background.jpeg");
 }
 .butn{
-    background-color: green;
-    border: none;
-    color: black; 
-    border: 2px solid #4CAF50;
-    padding: 12px 28px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 30px;
-    margin: 4px 2px;
-    cursor: pointer;
+  width: 150px;
+  height: 50px;
+  background-color: green;
+  border: none;
+  color: black; 
+  border: 2px solid #4CAF50;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 25px;
+  cursor: pointer;
 }
 .butn-logout{
     margin-left: 1200px;
@@ -83,15 +85,31 @@ body {
   border-top-right-radius: 0;
 }
 
-.car-display{    
-    padding: 30px;
-    border: 1px double red;
-    border-radius: 5px;
-    box-sizing: border-box; 
-    background-color:lightblue;
-    font-size: 25px;
-    font-variant: small-caps;
-    margin: auto;
+.image-cell{
+  width: 40%;
+  height: 60%;
+}
+.image-cell img{
+  height: 200px;
+  width: 280px;
+}
+
+
+.car-table{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.car-display{   
+  width: 50%; 
+  padding: 30px;
+  border: 1px double red;
+  border-radius: 5px;
+  box-sizing: border-box; 
+  background-color:lightblue;
+  font-size: 25px;
+  font-variant: small-caps;
+  margin: auto;
 }
 
 .car-display-button {

@@ -53,22 +53,3 @@ module.exports.getCars = function(req, res, callback){
 		}
 	});
 }
-
-
-/*module.exports.bookCar = function(req, res, carname, callback){
-	console.log("in book car model:");
-	Car.findOneAndUpdate({carname: carname}, function(err, docs){
-		if(err) throw err;
-		console.log("Query result:");
-		console.log(docs);
-		if(docs.length == 0){
-			var response = { status: 400, msg: "No cars found!"};
-			callback(res, response);
-		}
-		else{
-			console.log(docs.length+" cars fetched!");
-			var response = { status: 200, msg: "success", data:docs};
-			callback(res, response);
-		}
-	});
-}*/

@@ -256,9 +256,10 @@ app.get('/fetchcars', function(req, res){
 
 app.post('/bookcar', function(req, res){
   console.log("in book car GET");
+  //console.log('req:'+util.inspect(req));
   var newBooking = {
     carname: req.body.carname,
-    user: req.session.passport.user,
+    user: { id:req.user._id, username: req.user.username},
     location:req.body.location,
     hiredate: req.body.hiredate,
     returndate: req.body.returndate
