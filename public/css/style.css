@@ -12,22 +12,22 @@ body {
   background-image: url("/images/background.jpeg");
 }
 .butn{
-  width: 150px;
-  height: 50px;
+  width: auto;
+  height: auto;
   background-color: green;
   border: none;
   color: black; 
   border: 2px solid #4CAF50;
-  padding: 15px;
+  padding: 5px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  margin: 5px;
+  margin: 25px;
   cursor: pointer;
 }
 .butn-logout{
-    margin-left: 1200px;
+    margin-left: 1000px;
 }
 .butn:hover {
     background-color: red;
