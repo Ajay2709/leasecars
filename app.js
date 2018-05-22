@@ -20,6 +20,28 @@ mongoose.connect('mongodb://ajayTest:ajay2112@ds129540.mlab.com:29540/car_leasin
 var db = mongoose.connection;
 
 
+var storage = multer.diskStorage({
+  destination: function(req, file, callback){
+    callback(null, './public/images');
+  },
+  filename: function(req, file, callback){
+    callback(null, req.body.carName.replace(/ /g,'')+".jpeg");
+  }
+});
+var upload = multer({
+  storage: storage, 
+  limits: {fileSize: 1000000},
+  fileFilter: function(req, file, cb){
+  const filetypes = /jpeg|jpg|png|gif/;
+  if(filetypes.test(file.mimetype)){
+    return cb(null, true);
+  }
+  else{
+    cb('Error: Images Only!');
+  }
+}}).single('carImage');
+
+
 var routes = require('./routes/index.js');
 
 
@@ -229,20 +251,30 @@ app.get('/adminHome', function(req, res){
 
 
 app.post('/addcar', function(req, res, next){
-  console.log("addcar POST");
-  var newCar = {
-    carname: req.body.carname,
-    model: req.body.model,
-    fare: req.body.fare,
-    count: req.body.count,
-    available: req.body.available
-  };
-  console.log(newCar);
-  Car.addCar(req, res, newCar, function( res, result){
-      console.log("in callback: response = "+JSON.stringify(result));
-      res.send(JSON.stringify(result));
-    });
-
+  upload(req, res, function(err){
+    if(err){
+      console.log("error occured");
+      //window.alert('Error occured while uploading!');
+      res.sendFile(path.join(__dirname+"/views/adminhomepage.html"));
+    }
+    else{
+      console.log("upload successful"+req.file);
+      //window.alert('file uploaded');
+      var newCar = {
+        carname: req.body.carName,
+        model: req.body.carModel,
+        fare: req.body.carFare,
+        count: req.body.carCount,
+        available: req.body.carCount,
+        image: req.file.path
+      };
+      console.log(newCar);
+      Car.addCar(req, res, newCar, function( res, result){
+        console.log("in callback: response = "+JSON.stringify(result));
+        res.redirect('adminHome');   
+      });
+    }
+  });
 });
 
 

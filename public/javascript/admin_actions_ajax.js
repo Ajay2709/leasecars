@@ -7,19 +7,27 @@ var addNewCar = function(){
 var addCar = function(){
 	console.log("In  addCar ajax");
 
-	data = {"carname" : document.getElementById("carName").value, 
-			"model" : document.getElementById("carModel").value,
-			"fare" : document.getElementById("carFare").value,
-			"count" : document.getElementById("carCount").value,
-			"available": document.getElementById("carCount").value,
-			"carImage": document.getElementById("carImage").files[0].name
-		};
-	console.log(data);
-	$.ajax({
+	/*var data = new FormData();
+	jQuery.each(jQuery('#carImage')[0].files, function(i, file) {
+    	data.append('file-'+i, file);
+    });
+    */
+    var img=document.getElementById("carImage");
+    var data = new FormData();
+    data.append('carname',document.getElementById("carName").value);
+    data.append('model',document.getElementById("carModel").value);
+    data.append('fare',document.getElementById("carFare").value);
+    data.append('count',document.getElementById("carCount").value);
+    data.append('available',document.getElementById("carCount").value);
+   	data.append('img',img.files[0]);
+   	console.log(data);
+   	$.ajax({
 		url: 'addcar',
-		headers: {"Content-Type": "multipart/form-data"},
+		headers: {"Content-Type": "multipart/form-data"},//"application/json"
 		type: "POST",
-		data: JSON.stringify(data),
+		///contentType: false,
+    	//processData: false,
+    	data: data,//JSON.stringify(data),
 		success : function(result){
 			console.log("return to signup ajax success:"+result);
 			var data = JSON.parse(result);
