@@ -6,15 +6,18 @@ var addNewCar = function(){
 
 var addCar = function(){
 	console.log("In  addCar ajax");
+
 	data = {"carname" : document.getElementById("carName").value, 
 			"model" : document.getElementById("carModel").value,
 			"fare" : document.getElementById("carFare").value,
 			"count" : document.getElementById("carCount").value,
-			"available": document.getElementById("carCount").value};
+			"available": document.getElementById("carCount").value,
+			"carImage": document.getElementById("carImage").files[0].name
+		};
 	console.log(data);
 	$.ajax({
 		url: 'addcar',
-		headers: {"Content-Type" : "application/json"},
+		headers: {"Content-Type": "multipart/form-data"},
 		type: "POST",
 		data: JSON.stringify(data),
 		success : function(result){
@@ -54,9 +57,9 @@ var fetchCars = function(){
 				for(car of cars){
 					carName = car.carname;
 					html += "<tr  class='car-display' id='"+car.carname+"'>\
-						<td class='image-cell'><img src=/images/"+car.carname.replace(/ /g,'')+".jpeg class='image' alt='CAR'></td>\
-						<td class='ibfo-cell'><b>"+car.carname+"</b><br>Model:"+car.model+"\<br>Fare per hour:"+car.fare+"<br>Available units:"+car.available+"<br>\
-						<br><button data-target='#bookpopup' data-toggle='modal' class='butn-book'>Remove Car</button>\
+						<td class='image-cell'><img src=images/"+car.carname.replace(/ /g,'')+".jpeg class='image' alt='CAR'></td>\
+						<td class='info-cell'><b>"+car.carname+"</b><br>Model:"+car.model+"\<br>Fare per hour:"+car.fare+"<br>Available units:"+car.available+"<br>\
+						<br><button data-target='#bookpopup' data-toggle='modal' class='butn'>Remove Car</button>\
 						</tr>";
 				}
 				html += "</table>";
