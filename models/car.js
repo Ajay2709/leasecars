@@ -6,8 +6,7 @@ var CarSchema = mongoose.Schema({
 	model: String,
 	fare: Number,
 	count: Number,
-	available: Number,
-	image: String
+	available: Number
 });
 
 var Car = module.exports = mongoose.model('Car', CarSchema);
